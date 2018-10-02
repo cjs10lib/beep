@@ -17,6 +17,6 @@
 
   <img src="../../assets/imgs/chat-logo.png" alt="logo" class="logo">
 
-  <app-login-form></app-login-form>
+  <app-login-form (loginStatus)="login($event)"></app-login-form>
 
 </ion-content>
