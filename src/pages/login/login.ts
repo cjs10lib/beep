@@ -18,8 +18,8 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  navigateToRegisterPage(pageName: string) {
-    this.navCtrl.push(pageName);
+  navigateToPage(pageName: string) {
+    pageName === 'TabsPage' ? this.navCtrl.setRoot(pageName) : this.navCtrl.push(pageName);
   }
 
 }
