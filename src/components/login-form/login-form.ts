@@ -1,16 +1,10 @@
-import { LoginResponse } from './../../models/login/login-response.model';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Component, Output, EventEmitter } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+
 import { Account } from '../../models/account/account.model';
 import { AuthService } from '../../providers/auth-service/auth-service';
+import { LoginResponse } from './../../models/login/login-response.model';
 
-/**
- * Generated class for the LoginFormComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'app-login-form',
   templateUrl: 'login-form.html'

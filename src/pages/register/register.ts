@@ -1,12 +1,6 @@
+import { LoginResponse } from './../../models/login/login-response.model';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -15,11 +9,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RegisterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(private navCtrl: NavController,
+              private toast: ToastController) { }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
+  register(event: LoginResponse) {
+    if (!event.error) {
+      this.toast.create({ message: `Welcome to Beep ${event.result.user.email}`, duration: 3000, position: 'middle' }).present();
+      this.navCtrl.setRoot('ProfilePage');
+    } else {
+      this.toast.create({ message: event.error.message, duration: 3000, position: 'middle' }).present();
+    }
   }
 
 }
