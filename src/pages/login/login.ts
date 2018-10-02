@@ -17,7 +17,7 @@ export class LoginPage {
   login(event: LoginResponse) {
     if (!event.error) {
       this.toast.create({ message: `Welcome to Beep, ${event.result.user.email}`, duration: 3000, position: 'middle' }).present();
-      this.navCtrl.setRoot('ProfilePage');
+      this.navCtrl.setRoot('EditProfilePage');
     } else {
       this.toast.create({ message: event.error.message, duration: 3000, position: 'middle' }).present(); ;    
     }

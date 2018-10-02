@@ -1,6 +1,6 @@
 import { LoginResponse } from './../../models/login/login-response.model';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
