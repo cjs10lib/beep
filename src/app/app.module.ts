@@ -12,6 +12,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { FIREBASE_CONFIG } from './firebase.config';
 import { AuthService } from '../providers/auth-service/auth-service';
+import { DataService } from '../providers/data-service/data-service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AuthService } from '../providers/auth-service/auth-service';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService
+    AuthService,
+    DataService
   ]
 })
 export class AppModule {}

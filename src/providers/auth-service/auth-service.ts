@@ -9,6 +9,10 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth) { }
 
+  getAuthenticatedUser() {
+    return this.auth.authState;
+  }
+
   async createUserWithEmailAndPassword(account: Account) {
     try {
       return {
