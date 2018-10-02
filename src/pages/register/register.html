@@ -17,24 +17,6 @@
 
   <img src="../../assets/imgs/chat-logo.png" alt="logo" class="logo">
 
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-label floating>Email Address</ion-label>
-        <ion-input type="email">  </ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password">  </ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Confirm Password</ion-label>
-        <ion-input type="password">  </ion-input>
-      </ion-item>
-    </ion-card-content>
-    <ion-row align-right>
-      <button ion-button (click)="register()">Register</button>
-    </ion-row>
-  </ion-card>
+  <app-register-form></app-register-form>
 
 </ion-content>
