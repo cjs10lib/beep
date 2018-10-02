@@ -26,7 +26,7 @@ export class LoginPage {
       this.toast.create({ message: `Welcome to Beep, ${event.result.user.email}`, duration: 3000, position: 'middle' }).present();
       this.navCtrl.setRoot('ProfilePage');
     } else {
-      this.toast.create({ message: event.error.message, duration: 3000, position: 'middle' }).present();      
+      this.toast.create({ message: event.error.message, duration: 3000, position: 'middle' }).present(); ;    
     }
     
       // pageName === 'TabsPage' ? this.navCtrl.setRoot(pageName) : this.navCtrl.push(pageName);
