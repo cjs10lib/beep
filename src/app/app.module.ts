@@ -5,6 +5,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
+import {} from 'firebase'
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import { FIREBASE_CONFIG } from './firebase.config';
 
 @NgModule({
   declarations: [
@@ -12,7 +19,11 @@ import { MyApp } from './app.component';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFirestoreModule.enablePersistence(),
+    AngularFireAuthModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
