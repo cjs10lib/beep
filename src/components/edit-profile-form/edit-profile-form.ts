@@ -2,7 +2,7 @@
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { DataService } from './../../providers/data-service/data-service';
 import { Profile } from './../../models/profile/profile.model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { User } from 'firebase';
 import { Subscription } from 'rxjs';
 
@@ -12,17 +12,20 @@ import { Subscription } from 'rxjs';
 })
 export class EditProfileFormComponent implements OnInit, OnDestroy {
 
+  @Output() saveProfileResult: EventEmitter<Boolean>;
+
   profile = {} as Profile;
   authenticatedUser: User;
 
   subscription$: Subscription;
 
-  constructor(private dataService: DataService, private authService: AuthService) { }
+  constructor(private dataService: DataService, private authService: AuthService) {
+    this.saveProfileResult = new EventEmitter<Boolean>();
+  }
 
   ngOnInit(): void {
     this.subscription$ = this.authService.getAuthenticatedUser().subscribe(user => {
       this.authenticatedUser = user;
-      console.log(user)
     });
   }
 
@@ -36,7 +39,8 @@ export class EditProfileFormComponent implements OnInit, OnDestroy {
     if (this.authenticatedUser) {
       this.profile.email = this.authenticatedUser.email;
       
-      await this.dataService.saveProfile(this.authenticatedUser, this.profile);
+      const result = await this.dataService.saveProfile(this.authenticatedUser, this.profile);
+      this.saveProfileResult.emit(result);
     }
   }
 

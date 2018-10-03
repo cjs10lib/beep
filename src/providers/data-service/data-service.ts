@@ -3,6 +3,7 @@ import { Profile } from './../../models/profile/profile.model';
 import { Injectable } from '@angular/core';
 import { User } from 'firebase';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class DataService {
@@ -11,6 +12,14 @@ export class DataService {
 
   constructor(private db: AngularFirestore) {
     this.profileCollection = db.collection('profiles');
+  }
+
+  async verifyProfile(user: User) {
+    return (await this.db.doc(`profiles/${user.uid}`).ref.get()).exists;
+  }
+
+  getProfile(user: User) {
+    return this.profileCollection.doc(user.uid).valueChanges().pipe(take(1));
   }
 
   async saveProfile(user: User, profile: Profile) {

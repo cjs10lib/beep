@@ -15,11 +15,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EditProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams) { }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditProfilePage');
+  saveProfileResult(event: Boolean) {
+    console.log(event);
+    event ? this.navCtrl.setRoot('TabsPage') : console.error('Not authenticated or saved!');
   }
 
 }
