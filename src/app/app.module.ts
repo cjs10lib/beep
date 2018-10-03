@@ -13,6 +13,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FIREBASE_CONFIG } from './firebase.config';
 import { AuthService } from '../providers/auth-service/auth-service';
 import { DataService } from '../providers/data-service/data-service';
+import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation'
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { DataService } from '../providers/data-service/data-service';
   ],
   imports: [
     BrowserModule,
+    CustomFormsModule,
+    FormsModule,
     IonicModule.forRoot(MyApp),
 
     AngularFireModule.initializeApp(FIREBASE_CONFIG),

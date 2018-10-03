@@ -1,19 +1,34 @@
-<ion-card class="register-form">
-  <ion-card-content>
-    <ion-item>
-      <ion-label floating>Email Address</ion-label>
-      <ion-input type="email" [(ngModel)]="account.email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="account.password"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Confirm Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-  </ion-card-content>
-  <ion-row align-right>
-    <button ion-button (click)="register()">Register</button>
-  </ion-row>
-</ion-card>
+<form #registerForm="ngForm">
+  <ion-card class="register-form">
+    <ion-card-content>
+      <ion-item>
+        <ion-label floating>Email Address</ion-label>
+        <ion-input type="email" [(ngModel)]="account.email" name="email" #email="ngModel" required email="true"></ion-input>
+        <!-- pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" -->
+      </ion-item>
+      <div padding *ngIf="email.touched && email.invalid">
+        <span class="global__input-error">Email address is not <strong>valid</strong></span>
+      </div>
+
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="account.password" name="password" #password="ngModel" required pattern="[a-zA-Z0-9!@#$%^&*]{6,20}$"></ion-input>
+      </ion-item>
+      <div padding *ngIf="password.touched && password.invalid">
+        <span class="global__input-error">Password must at least be 6 characters long!</span>
+      </div>
+
+      <ion-item>
+        <ion-label floating>Confirm Password</ion-label>
+        <ion-input type="password" ngModel name="confirmPassword" #confirmPassword="ngModel" appConfirmEqualValidator="password"
+          required pattern="[a-zA-Z0-9!@#$%^&*]{6,20}$"></ion-input>
+      </ion-item>
+      <div padding *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">
+        <span class="global__input-error">Both passwords do not match!</span>
+      </div>
+    </ion-card-content>
+    <ion-row align-right>
+      <button ion-button (click)="register()" [disabled]="registerForm.invalid">Register</button>
+    </ion-row>
+  </ion-card>
+</form>
