@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { User } from 'firebase';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class DataService {
@@ -18,7 +19,7 @@ export class DataService {
     return (await this.db.doc(`profiles/${user.uid}`).ref.get()).exists;
   }
 
-  getProfile(user: User) {
+  getProfile(user: User): Observable<Profile> {
     return this.profileCollection.doc(user.uid).valueChanges().pipe(take(1));
   }
 

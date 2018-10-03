@@ -23,7 +23,7 @@
         <ion-input type="password" ngModel name="confirmPassword" #confirmPassword="ngModel" appConfirmEqualValidator="password"
           required pattern="[a-zA-Z0-9!@#$%^&*]{6,20}$"></ion-input>
       </ion-item>
-      <div padding *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">
+      <div padding *ngIf="confirmPassword.touched && confirmPassword.errors">
         <span class="global__input-error">Both passwords do not match!</span>
       </div>
     </ion-card-content>

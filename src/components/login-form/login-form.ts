@@ -12,7 +12,10 @@ import { LoginResponse } from './../../models/login/login-response.model';
 export class LoginFormComponent {
 
   @Output() loginStatus: EventEmitter<LoginResponse>;
-  account = {} as Account;
+  account = {
+    email: 'christainonwe@gmail.com',
+    password: '08087881103'
+  } as Account;
 
   constructor(private navCtrl: NavController, private authService: AuthService) {
     this.loginStatus = new EventEmitter<LoginResponse>();
