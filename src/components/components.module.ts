@@ -5,6 +5,7 @@ import { RegisterFormComponent } from './register-form/register-form';
 import { EditProfileFormComponent } from './edit-profile-form/edit-profile-form';
 import { ConfirmEqualValidatorDirective } from '../shared/confirm-equal-validator.directive';
 import { ProfileViewComponent } from './profile-view/profile-view';
+import { ProfileSearchComponent } from './profile-search/profile-search';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { ProfileViewComponent } from './profile-view/profile-view';
 
         
         ConfirmEqualValidatorDirective,
+    ProfileSearchComponent,
     ],
     imports: [
         IonicModule
@@ -23,7 +25,8 @@ import { ProfileViewComponent } from './profile-view/profile-view';
         LoginFormComponent,
         RegisterFormComponent,
         EditProfileFormComponent,
-        ProfileViewComponent
+        ProfileViewComponent,
+    ProfileSearchComponent
     ]
 })
 export class ComponentsModule { }
