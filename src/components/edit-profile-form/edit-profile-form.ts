@@ -2,7 +2,7 @@
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { DataService } from './../../providers/data-service/data-service';
 import { Profile } from './../../models/profile/profile.model';
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { User } from 'firebase';
 import { Subscription } from 'rxjs';
 
@@ -14,7 +14,7 @@ export class EditProfileFormComponent implements OnInit, OnDestroy {
 
   @Output() saveProfileResult: EventEmitter<Boolean>;
 
-  profile = {} as Profile;
+  @Input() profile: Profile;
   authenticatedUser: User;
 
   subscription$: Subscription;
@@ -24,6 +24,10 @@ export class EditProfileFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (!this.profile) {
+      this.profile = {} as Profile;
+    }
+
     this.subscription$ = this.authService.getAuthenticatedUser().subscribe(user => {
       this.authenticatedUser = user;
     });
