@@ -9,5 +9,11 @@
 
 
 <ion-content padding>
-
+  <app-channel-chat [chatMessage]="message" *ngFor="let message of channelMessages$ | async"></app-channel-chat>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar >
+    <app-send-message-box (sendMessage)="sendMessage($event)"></app-send-message-box>
+  </ion-toolbar>
+</ion-footer>

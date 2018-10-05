@@ -9,6 +9,7 @@ import { ProfileSearchComponent } from './profile-search/profile-search';
 import { SendMessageBoxComponent } from './send-message-box/send-message-box';
 import { ChatMessageComponent } from './chat-message/chat-message';
 import { ChannelListComponent } from './channel-list/channel-list';
+import { ChannelChatComponent } from './channel-chat/channel-chat';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { ChannelListComponent } from './channel-list/channel-list';
     SendMessageBoxComponent,
     ChatMessageComponent,
     ChannelListComponent,
+    ChannelChatComponent,
     ],
     imports: [
         IonicModule
@@ -35,7 +37,8 @@ import { ChannelListComponent } from './channel-list/channel-list';
     ProfileSearchComponent,
     SendMessageBoxComponent,
     ChatMessageComponent,
-    ChannelListComponent
+    ChannelListComponent,
+    ChannelChatComponent
     ]
 })
 export class ComponentsModule { }

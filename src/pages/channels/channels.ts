@@ -12,6 +12,8 @@ import { ChatService } from './../../providers/chat-service/chat-service';
 })
 export class ChannelsPage {
 
+  loader: Loading;
+
   channels: Channel[] = [];
 
   subscription$: Subscription;
@@ -22,18 +24,19 @@ export class ChannelsPage {
               private loadingCtrl: LoadingController) { }
 
   ionViewWillEnter() {
-    const loader: Loading = this.loadingCtrl.create({ spinner: 'crescent', content: 'Loading channels...' });
-    loader.present();
+    this.loader = this.loadingCtrl.create({ spinner: 'crescent', content: 'Loading channels...' });
+    this.loader.present();
 
     this.subscription$ = this.chatService.getChannels().subscribe(channels => {
       this.channels = channels;
-      loader.dismiss();
+      this.loader.dismiss();
     });
   }
 
   ionViewWillLeave() {
     if (this.subscription$) {
       this.subscription$.unsubscribe();
+      this.loader.dismiss();
     }
   }
 

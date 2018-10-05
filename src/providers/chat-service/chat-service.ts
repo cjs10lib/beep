@@ -1,3 +1,4 @@
+import { ChannelMessage } from './../../models/channel/channel-message.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 import { Injectable } from '@angular/core';
@@ -34,6 +35,10 @@ export class ChatService {
     return this.channels$;
   }
 
+  getChannelMesssages(channel: string): Observable<ChannelMessage[]> {
+    return this.db.collection('channels', ref => ref.where('channel', '==', channel).orderBy('created')).valueChanges();
+  }
+
   async addChannel(channel: Channel) {
     const channelExist = await this.verifyChannel(channel);
     if (!channelExist) {
@@ -42,6 +47,10 @@ export class ChatService {
 
     // else
     return 'Sorry! ' + channel.name + ' is not available. Try another channel name.';
+  }
+
+  async sendChannelChatMessage(message: ChannelMessage) {
+    return await this.db.collection('channels').add(message);
   }
 
 }
