@@ -1,36 +1,26 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ChatService } from '../../providers/chat-service/chat-service';
-import { LoadingController, Loading } from 'ionic-angular';
-import { Channel } from '../../models/channel/channel.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
+
+import { Channel } from '../../models/channel/channel.model';
 
 @Component({
   selector: 'app-channel-list',
   templateUrl: 'channel-list.html'
 })
-export class ChannelListComponent implements OnInit, OnDestroy {
+export class ChannelListComponent {
 
-  channels: Channel[] = [];
+  @Output() selectedChannel: EventEmitter<Channel>;
+
+  @Input() channel: Channel;
 
   subscription$: Subscription;
 
-  constructor(private chatService: ChatService,
-              private loadingCtrl: LoadingController) {}
-
-  ngOnInit(): void {
-    const loader: Loading = this.loadingCtrl.create({ spinner: 'crescent', content: 'Loading channels...' });
-    loader.present();
-
-    this.subscription$ = this.chatService.getChannels().subscribe(channels => {
-      this.channels = channels;
-      loader.dismiss();
-    });
+  constructor() {
+    this.selectedChannel = new EventEmitter<Channel>();
   }
 
-  ngOnDestroy(): void {
-    if (this.subscription$) {
-      this.subscription$.unsubscribe();
-    }
+  selectChannel(channel: Channel) {
+    this.selectedChannel.emit(channel);
   }
 
 }

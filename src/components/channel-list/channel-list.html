@@ -1,5 +1,5 @@
 <ion-list >
-  <ion-item *ngFor="let channel of channels" (click)="channel.uid">
+  <ion-item (click)="selectChannel(channel)">
     <button ion-item>#{{ channel?.name }}</button>
   </ion-item>
 </ion-list>
