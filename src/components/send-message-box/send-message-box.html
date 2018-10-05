@@ -1,10 +1,12 @@
-<ion-grid>
-  <ion-row>
-    <ion-col col-9>
-      <ion-textarea color="primary" [(ngModel)]="message.content" placeholder="Enter Message..."></ion-textarea>
-    </ion-col>
-    <ion-col col-3>
-      <button ion-button clear (click)="send()">Send</button>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+<form #messageForm="ngForm">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-9>
+        <ion-textarea color="primary" [(ngModel)]="message.content" name="content" placeholder="Enter Message..." required></ion-textarea>
+      </ion-col>
+      <ion-col col-3>
+        <button ion-button clear (click)="send()" [disabled]="messageForm.invalid">Send</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>

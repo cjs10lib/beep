@@ -15,8 +15,10 @@ export class SendMessageBoxComponent {
   }
 
   send() {
-    this.sendMessage.emit(this.message);
-    this.message.content = "";
+    if (this.message.content) {
+      this.sendMessage.emit(this.message);
+      this.message.content = "";
+    }
   }
 
 }

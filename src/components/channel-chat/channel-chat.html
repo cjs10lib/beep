@@ -1,10 +1,9 @@
 
-<ion-list class="channel-chat">
-  <ion-item>
-    <ion-avatar item-left>
-      <img src="../../assets/imgs/avatar.png" [alt]="chatMessage?.user?.firstName">
-    </ion-avatar>
-    <h2>{{ chatMessage?.content }}</h2>
-    <span>{{ convertTimestampToDate() | date: 'dd/MM h:mm a' }}</span> &nbsp;
-  </ion-item>
-</ion-list>
+<ion-item class="channel-chat">
+  <ion-avatar item-left>
+    <img src="../../assets/imgs/avatar.png" [alt]="chatMessage?.user?.firstName">
+  </ion-avatar>
+  <h2>{{ userProfile?.fullName }}</h2>
+  <p>{{ chatMessage?.content }}</p>
+  <p>{{ convertTimestampToDate() | date: 'dd/MM h:mm a' }}</p> &nbsp;
+</ion-item>

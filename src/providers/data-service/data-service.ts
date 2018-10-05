@@ -67,7 +67,6 @@ export class DataService {
       await this.db.doc(`profiles/${user.uid}`).set(profile);
       return true;
     } catch (e) {
-      console.error(e);
       return false;
     }
   }

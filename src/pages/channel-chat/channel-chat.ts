@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content, List } from 'ionic-angular';
 import { Subscription, Observable } from 'rxjs';
 
 import { ChannelMessage } from '../../models/channel/channel-message.model';
@@ -15,6 +15,7 @@ import { Profile } from '../../models/profile/profile.model';
   templateUrl: 'channel-chat.html',
 })
 export class ChannelChatPage {
+  @ViewChild(Content) contentArea: Content;
 
   channel = {} as Channel;
   userProfile = {} as Profile;
@@ -23,9 +24,7 @@ export class ChannelChatPage {
 
   subscription$: Subscription;
 
-  constructor(private navCtrl: NavController,
-              private navParams: NavParams,
-              private dataService: DataService,
+  constructor(private navParams: NavParams,
               private authService: AuthService,
               private chatService: ChatService) { }
 
@@ -37,7 +36,11 @@ export class ChannelChatPage {
     });
 
     // get channel chat messages
-    this.getChatMessages();
+    this.getChatMessages();    
+  }
+
+  ionViewDidEnter(){
+    this.contentArea.scrollToBottom();
   }
 
   ionViewWillLeave() {
@@ -55,6 +58,7 @@ export class ChannelChatPage {
     }
 
     await this.chatService.sendChannelChatMessage(message);
+    this.contentArea.scrollToBottom();
   }
 
   private getChatMessages() {
