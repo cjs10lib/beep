@@ -3,6 +3,7 @@ import { AlertController, IonicPage, LoadingController, Loading } from 'ionic-an
 
 import { Channel } from '../../models/channel/channel.model';
 import { ChatService } from './../../providers/chat-service/chat-service';
+import { Observable, Subscription } from 'rxjs';
 
 @IonicPage()
 @Component({
@@ -11,10 +12,30 @@ import { ChatService } from './../../providers/chat-service/chat-service';
 })
 export class ChannelsPage {
 
+  channels: Channel[] = [];
+
+  subscription$: Subscription;
+
   constructor(private alertCtrl: AlertController,
               private chatService: ChatService,
-              private loadingCtrl: LoadingController) { }
+              private loadingCtrl: LoadingController) {
+              }
+              
+  ionViewWillEnter() {
+    const loader: Loading = this.loadingCtrl.create({ spinner: 'crescent', content: 'Loading channels...' });
+    loader.present();
 
+    this.subscription$ = this.chatService.getChannels().subscribe(channels => {
+      this.channels = channels;
+      loader.dismiss();
+    });
+  }
+
+  ionViewWillLeave() {
+    if (this.subscription$) {
+      this.subscription$.unsubscribe();
+    }
+  }
 
   showAddChannelDialog() {
     const prompt = this.alertCtrl.create({
@@ -54,9 +75,5 @@ export class ChannelsPage {
 
     alert.present();
   }
-
-  // get loader(): Loading {
-  //   return this.loadingCtrl.create({ spinner: 'crescent', content: 'Saving changes...' });
-  // }
 
 }

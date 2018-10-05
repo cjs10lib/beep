@@ -2,18 +2,36 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 
 import { Injectable } from '@angular/core';
 import { Channel } from '../../models/channel/channel.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ChatService {
 
-  channelCollection: AngularFirestoreCollection<Channel>;
+  private channelCollection: AngularFirestoreCollection<Channel>;
+  private channels$: Observable<Channel[]>;
 
   constructor(private db: AngularFirestore) {
     this.channelCollection = db.collection('channel-names');
+
+    this.channels$ = this.channelCollection.snapshotChanges().pipe(
+      map(change => {
+        return change.map(a => {
+          const data = a.payload.doc.data() as Channel;
+          data.uid = a.payload.doc.id;
+
+          return data;
+        });
+      })
+    );
   }
   
   async verifyChannel(channel: Channel) {
-    return (await this.db.doc(`channel-names/${channel.name}`).ref.get()).exists;
+    return (await this.db.doc(`channel-names/${channel.name.toLowerCase()}`).ref.get()).exists;
+  }
+
+  getChannels() {
+    return this.channels$;
   }
 
   async addChannel(channel: Channel) {
