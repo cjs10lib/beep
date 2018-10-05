@@ -1,9 +1,10 @@
+import { AuthService } from './../auth-service/auth-service';
 import { Profile } from './../../models/profile/profile.model';
 
 import { Injectable } from '@angular/core';
-import { User } from 'firebase';
+import { User, auth } from 'firebase';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { take, map } from 'rxjs/operators';
+import { take, map, mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -12,7 +13,7 @@ export class DataService {
   profileCollection: AngularFirestoreCollection<Profile>;
   profiles$: Observable<Profile[]>;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private authService: AuthService) {
     this.profileCollection = db.collection('profiles');
 
     this.profiles$ = this.db.collection('profiles').snapshotChanges().pipe(map(change => {
@@ -45,8 +46,16 @@ export class DataService {
     return (await this.db.doc(`profiles/${user.uid}`).ref.get()).exists;
   }
 
-  getUsers() {
+  getProfiles() {
     return this.profiles$;
+  }
+
+  getAuthenticatedUserProfile() {
+    return this.authService.getAuthenticatedUser().pipe(
+      map(auth => auth.uid),
+      mergeMap(authId => this.db.doc(`profiles/${authId}`).valueChanges()),
+      take(1)
+    );
   }
 
   getProfile(user: User): Observable<Profile> {

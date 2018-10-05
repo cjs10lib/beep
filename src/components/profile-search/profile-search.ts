@@ -23,7 +23,7 @@ export class ProfileSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.dataService.getUsers().subscribe(users => {
+    this.subscription = this.dataService.getProfiles().subscribe(users => {
       this.profile = users;
     });
   }
