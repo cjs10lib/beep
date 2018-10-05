@@ -19,9 +19,5 @@
 
 
 <ion-content padding>
-  <ion-list >
-    <ion-item *ngFor="let channel of channels">
-      <h2>#{{ channel?.name }}</h2>
-    </ion-item>
-  </ion-list>
+  <app-channel-list></app-channel-list>
 </ion-content>

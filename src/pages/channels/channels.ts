@@ -17,26 +17,8 @@ export class ChannelsPage {
   subscription$: Subscription;
 
   constructor(private alertCtrl: AlertController,
-              private chatService: ChatService,
-              private loadingCtrl: LoadingController) {
-              }
-              
-  ionViewWillEnter() {
-    const loader: Loading = this.loadingCtrl.create({ spinner: 'crescent', content: 'Loading channels...' });
-    loader.present();
-
-    this.subscription$ = this.chatService.getChannels().subscribe(channels => {
-      this.channels = channels;
-      loader.dismiss();
-    });
-  }
-
-  ionViewWillLeave() {
-    if (this.subscription$) {
-      this.subscription$.unsubscribe();
-    }
-  }
-
+              private chatService: ChatService) { }
+ 
   showAddChannelDialog() {
     const prompt = this.alertCtrl.create({
       title: 'Channel Name',
