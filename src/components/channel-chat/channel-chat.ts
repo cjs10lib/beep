@@ -21,7 +21,6 @@ export class ChannelChatComponent {
 
   convertTimestampToDate() {
     const timestamp = new firestore.Timestamp(this.chatMessage.created['seconds'], this.chatMessage.created['nanoseconds']);
-    console.log(timestamp.toDate());
     return timestamp.toDate();
   }
 
