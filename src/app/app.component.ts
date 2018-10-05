@@ -13,7 +13,7 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private authService: AuthService) {
 
     this.authService.getAuthenticatedUser().subscribe(auth => {
-      !auth ? this.rootPage = 'LoginPage' : this.rootPage = 'MessagePage';
+      !auth ? this.rootPage = 'LoginPage' : this.rootPage = 'TabsPage';
     });
 
     platform.ready().then(() => {

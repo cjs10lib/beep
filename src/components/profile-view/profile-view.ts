@@ -32,12 +32,14 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
     this.loader.present();
     
     this.subscription$ = this.authService.getAuthenticatedUser().subscribe(user => {
-      this.dataService.getProfile(user).subscribe(profile => {
-        this.userProfile = profile;
-        this.existingProfile.emit(profile);
-        
-        this.loader.dismiss();
-      });
+      if (user) {
+        this.dataService.getProfile(user).subscribe(profile => {
+          this.userProfile = profile;
+          this.existingProfile.emit(profile);
+          
+          this.loader.dismiss();
+        });
+      }
     });
   }
 
@@ -45,6 +47,10 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
     if (this.subscription$) {
       this.subscription$.unsubscribe();
     }
+  }
+
+  signOut() {
+    this.authService.signOut();
   }
 
 }
