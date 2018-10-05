@@ -15,6 +15,7 @@ import { AuthService } from '../providers/auth-service/auth-service';
 import { DataService } from '../providers/data-service/data-service';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation'
+import { ChatService } from '../providers/chat-service/chat-service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CustomFormsModule } from 'ng2-validation'
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
-    DataService
+    DataService,
+    ChatService
   ]
 })
 export class AppModule {}

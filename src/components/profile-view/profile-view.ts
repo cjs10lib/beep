@@ -22,11 +22,11 @@ export class ProfileViewComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private dataService: DataService,
-              private loading: LoadingController) 
+              private loadingCtrl: LoadingController) 
   {
     this.existingProfile = new EventEmitter<Profile>();
     
-    this.loader = this.loading.create({ spinner: 'crescent', content: 'Loading profile...' });
+    this.loader = this.loadingCtrl.create({ spinner: 'crescent', content: 'Loading profile...' });
   }
 
   ngOnInit(): void {
