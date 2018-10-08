@@ -1,9 +1,25 @@
 
-<ion-item class="channel-chat">
-  <ion-avatar item-left>
-    <img src="../../assets/imgs/avatar.png" [alt]="chatMessage?.user?.firstName">
+<div class="channel__chat-content"></div>
+
+<ion-item no-lines class="channel-chat" *ngIf="alignUserChatTo_right; else align_left">
+  <ion-avatar item-right>
+    <img src="../../assets/imgs/avatar.png" [alt]="messageSenderProfile?.firstName">
   </ion-avatar>
-  <h2>{{ userProfile?.fullName }}</h2>
-  <p>{{ chatMessage?.content }}</p>
-  <p>{{ convertTimestampToDate() | date: 'dd/MM h:mm a' }}</p> &nbsp;
+  <div class="align-right">
+    <!-- <h2>{{ messageSenderProfile?.fullName }}</h2> -->
+    <h2>Me</h2>
+    <p>{{ chatMessage?.content }}</p>
+    <p>{{ convertTimestampToDate() | date: 'dd/MM h:mm a' }}</p> &nbsp;
+  </div>  
 </ion-item>
+
+<ng-template #align_left>
+  <ion-item no-lines class="channel-chat">
+    <ion-avatar item-left>
+      <img src="../../assets/imgs/avatar.png" [alt]="chatMessage?.user?.firstName">
+    </ion-avatar>   
+    <h2>{{ messageSenderProfile?.fullName }}</h2>
+    <p>{{ chatMessage?.content }}</p>
+    <p>{{ convertTimestampToDate() | date: 'dd/MM h:mm a' }}</p>
+  </ion-item>
+</ng-template>

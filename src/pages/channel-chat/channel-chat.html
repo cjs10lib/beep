@@ -1,19 +1,26 @@
 
-<ion-header>
 
-  <ion-navbar>
-    <ion-title>{{ channel.name }}</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding #scroller>
-  <app-channel-chat [chatMessage]="message" *ngFor="let message of channelMessages$ | async"></app-channel-chat>
-</ion-content>
-
-<ion-footer>
-  <ion-toolbar >
-    <app-send-message-box (sendMessage)="sendMessage($event)"></app-send-message-box>
-  </ion-toolbar>
-</ion-footer>
+  <ion-header>
+  
+    <ion-navbar>
+      <div class="page-channel-chat">
+        <ion-title>{{ channel.name }}</ion-title>
+      </div>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <div class="page-channel-chat">
+      <app-channel-chat [chatMessage]="message" [userProfile]="userProfile" *ngFor="let message of channelMessages$ | async"></app-channel-chat>
+    </div>
+  </ion-content>
+  
+  <ion-footer>
+    <ion-toolbar> 
+      <div class="page-channel-chat">
+        <app-send-message-box (sendMessage)="sendMessage($event)"></app-send-message-box>
+      </div>
+    </ion-toolbar>
+  </ion-footer>

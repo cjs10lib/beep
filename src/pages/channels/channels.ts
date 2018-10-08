@@ -41,7 +41,6 @@ export class ChannelsPage {
   }
 
   selectedChannel(channel: Channel) {
-    console.log(channel);
     this.navCtrl.push('ChannelChatPage', { channel: channel });
   }
  

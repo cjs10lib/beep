@@ -1,5 +1,13 @@
-channel-chat {
+
+
+
+.channel-chat {
     h2 {
-        padding: 5px;
+        padding: 5px 5px 5px 0;
+    }
+    .align-right {
+        h2, p {
+            text-align: right;
+        }
     }
 }

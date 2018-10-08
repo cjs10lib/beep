@@ -58,8 +58,8 @@ export class DataService {
     );
   }
 
-  getProfile(user: User): Observable<Profile> {
-    return this.profileCollection.doc(user.uid).valueChanges().pipe(take(1));
+  getProfile(profileId: string): Observable<Profile> {
+    return this.profileCollection.doc(profileId).valueChanges().pipe(take(1));
   }
 
   async saveProfile(user: User, profile: Profile) {

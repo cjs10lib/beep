@@ -11,22 +11,28 @@ import { firestore, User } from 'firebase/app';
 })
 export class ChannelChatComponent implements OnInit, OnDestroy {
 
-  @Input() chatMessage: ChannelMessage;
+  @Input() chatMessage = {} as ChannelMessage;
+  @Input() userProfile = {} as Profile;
 
-  userProfile = {} as Profile;
+  alignUserChatTo_right: boolean;
+
+  messageSenderProfile = {} as Profile;
 
   subscription$: Subscription;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    if (!this.chatMessage) {
-      this.chatMessage = {} as ChannelMessage;
+    
+    if (this.chatMessage.user.uid === this.userProfile.uid) {
+      console.log(this.userProfile);
+      this.alignUserChatTo_right = true;
     }
 
+    
     if (this.chatMessage) {
-      this.subscription$ = this.dataService.getProfile(<User>this.chatMessage.user).subscribe(profile => {
-        this.userProfile = profile;
+      this.subscription$ = this.dataService.getProfile(this.chatMessage.user.uid).subscribe(profile => {
+        this.messageSenderProfile = profile;
       });
     }
   }
